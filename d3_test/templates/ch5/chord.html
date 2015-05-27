@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<title></title>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+<style>
+.chord path {
+   stroke: black;
+   stroke-width: 0.2;
+   opacity: 0.6;
+}
+</style>
+
+<div id="graph"></div>
+
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch5/helpers.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch5/chord.js') }} "  charset="UTF-8"></script>

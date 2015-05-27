@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<title></title>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+<style>
+.ocean {
+  fill: #759dd1;
+}
+
+.river {
+  fill: none;
+  stroke: #759dd1;
+  stroke-width: 1;
+}
+
+.land {
+  fill: #ede9c9;
+  stroke: #79bcd3;
+  stroke-width: 2;
+}
+
+.boundary {
+  stroke: #7b5228;
+  stroke-width: 1;
+  fill: none;
+}
+
+.urban {
+  fill: #e1c0a3;
+}
+
+.airport {
+  fill: #9e56c7;
+  opacity: 0.6;
+  stroke: #69349d;
+}
+
+.route {
+  fill: none;
+  stroke: black;
+  stroke-width: 1;
+}
+</style>
+
+<div id="graph"></div>
+
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch3/geography.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch3/queue.v1.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch3/topojson.js') }} "  charset="UTF-8"></script>

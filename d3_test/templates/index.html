@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+     <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.11.3.min.js') }} "  charset="UTF-8"></script>
+    <script>
+        function get_d3_pic(){
+             var con_url = $("#con_url").val();
+             var url = "/"+con_url+"/";
+             $("#d3_con").load(url);
+        }
+    </script>
+</head>
+<body>
+
+   <div style="width: 200px;float:left;">
+        <select id="con_url" style="width:200px;height:560px;" size="20" onclick="get_d3_pic()">
+            <optgroup label="ch1_ch2">
+                <option value="histogram">histogram</option>
+                <option value="axes">axes</option>
+                <option value="colours">colours</option>
+                <option value="css">css</option>
+                <option value="drwho">drwho</option>
+                <option value="html">html</option>
+            </optgroup>
+            <optgroup label="ch3">
+                <option value="ch3/arrays">arrays</option>
+                <option value="ch3/geography">geography</option>
+                <option value="ch3/ordinal_scales">ordinal_scales</option>
+                <option value="ch3/quantitative_scales">quantitative_scales</option>
+            </optgroup>
+            <optgroup label="ch4">
+                <option value="ch4/brushes">brushes</option>
+                <option value="ch4/drag">drag</option>
+                <option value="ch4/easing">easing</option>
+                <option value="ch4/events">events</option>
+                <option value="ch4/timers">timers</option>
+                <option value="ch4/zoom">zoom</option>
+            </optgroup>
+            <optgroup label="ch5">
+                <option value="ch5/chord">chord</option>
+                <option value="ch5/cluster">cluster</option>
+                <option value="ch5/force">force</option>
+                <option value="ch5/histogram">histogram</option>
+                <option value="ch5/pack">pack</option>
+                <option value="ch5/partition">partition</option>
+                <option value="ch5/pie">pie</option>
+                <option value="ch5/stack">stack</option>
+                <option value="ch5/tree">tree</option>
+                <option value="ch5/treemap">treemap</option>
+            </optgroup>
+        </select>
+   </div>
+    <div  style="width: 900px;float:left;" id="d3_con"></div>
+</body>
+</html>

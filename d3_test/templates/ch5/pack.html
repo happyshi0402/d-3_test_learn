@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<title></title>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+
+<style>
+#nicktool {
+  font-size: 1.3em;
+}
+
+#nicktool rect {
+  fill: white;
+}
+</style>
+
+<div id="graph"></div>
+
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch5/helpers.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='ch5/pack.js') }} "  charset="UTF-8"></script>

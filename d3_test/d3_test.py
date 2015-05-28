@@ -13,6 +13,54 @@ app = Flask(__name__)
 def index():
     return render_template("/index.html")
 
+@app.route('/svg/test1/')
+def svg_test1():
+    return render_template("/svg/test1.html")
+
+@app.route('/svg/test2/')
+def svg_test2():
+    return render_template("/svg/test2.html")
+
+@app.route('/svg/test3/')
+def svg_test3():
+    return render_template("/svg/test3.html")
+
+@app.route('/svg/test4/')
+def svg_test4():
+    return render_template("/svg/test4.html")
+
+@app.route('/svg/test5/')
+def svg_test5():
+    return render_template("/svg/test5.html")
+
+@app.route('/svg/test6/')
+def svg_test6():
+    return render_template("/svg/test6.html")
+
+@app.route('/d3/learn1/')
+def d3_learn1():
+    return render_template("/d3_learn1/d3_learn1.html")
+
+@app.route('/d3/learn2/')
+def d3_learn2():
+    return render_template("/d3_learn1/d3_learn2.html")
+
+@app.route('/d3/learn3/')
+def d3_learn3():
+    return render_template("/d3_learn1/d3_learn3.html")
+
+@app.route('/d3/learn4/')
+def d3_learn4():
+    return render_template("/d3_learn1/d3_learn4.html")
+
+@app.route('/d3/learn5/')
+def d3_learn5():
+    return render_template("/d3_learn1/d3_learn5.html")
+
+@app.route('/d3/learn6/')
+def d3_learn6():
+    return render_template("/d3_learn1/d3_learn6.html")
+
 @app.route('/histogram/')
 def histogram():
     return render_template("/ch1/histogram.html")
@@ -45,10 +93,18 @@ def drwho_csv():
 def html():
     return render_template("/ch2/html.html")
 
+
+@app.route('/paths/')
+def paths():
+    return render_template("/ch2/paths.html")
+
 @app.route('/svg/')
 def svg():
     return render_template("/ch2/svg.html")
 
+@app.route('/table/')
+def table():
+    return render_template("/ch2/table.html")
 
 @app.route('/ch3/arrays/')
 def ch3_arrays():

@@ -1,6 +1,6 @@
 
 var width = 1024,
-    height = 768,
+    height = 268,
     rings = 15;
 
 var svg = d3.select('#graph')

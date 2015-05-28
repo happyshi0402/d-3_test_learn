@@ -52,7 +52,8 @@ d3.json('/d3/json/learn5/', function (data) {
         .attr('x', function (d) { return x(
            0
          ); })
-        .attr('width',  function (d) { return  x(d.N) } )
+        .attr('width',  function (d) { return  x(d.N) - 100 } )
+        .attr('id',  function (d) { return  'bar'+parseInt(x(d.N)) } )
         .attr('y', function (d) { return y(d.bucket); })
         .attr('height',  y.rangeBand());
-});
+    });

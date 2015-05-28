@@ -16,6 +16,8 @@ d3.json('/ch5/treemap/json/karma_matrix/', function (data) {
                                  function (d) { return d.to; },
                                  function (d) { return d[0].to; });
 
+    alert(tree);
+
     var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
@@ -27,27 +29,27 @@ d3.json('/ch5/treemap/json/karma_matrix/', function (data) {
 
     var chart = svg.append('g')
             .attr('transform', 'translate('+width/2+','+height/2+')');
-    
+
     var link = chart.selectAll(".link")
             .data(links)
             .enter().append("path")
             .attr("class", "link")
             .attr("d", diagonal);
-    
-    var node = chart.selectAll(".node")
-            .data(nodes)
-            .enter().append("g")
-            .attr("class", "node")
-            .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; });
-    
-    node.append("circle")
-        .attr("r", 4.5)
-        .attr('fill', function (d) { return helpers.color(d.nick); });
-    
-    node.append("text")
-        .attr("dy", ".31em")
-        .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-        .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
-        .text(function(d) { return d.nick; })
-        .style('font-size', function (d) { return d.depth > 1 ? '0.8em' : '1.1em'; });
+    //
+    //var node = chart.selectAll(".node")
+    //        .data(nodes)
+    //        .enter().append("g")
+    //        .attr("class", "node")
+    //        .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; });
+    //
+    //node.append("circle")
+    //    .attr("r", 4.5)
+    //    .attr('fill', function (d) { return helpers.color(d.nick); });
+    //
+    //node.append("text")
+    //    .attr("dy", ".31em")
+    //    .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+    //    .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+    //    .text(function(d) { return d.nick; })
+    //    .style('font-size', function (d) { return d.depth > 1 ? '0.8em' : '1.1em'; });
 });

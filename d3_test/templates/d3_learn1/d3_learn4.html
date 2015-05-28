@@ -13,25 +13,6 @@
 <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
 <script>
 
-
-    function normals(µ, σ) {
-        var x, y, r;
-        do {
-          x = Math.random() * 2 - 1;
-          y = Math.random() * 2 - 1;
-            alert("x:"+x);
-            alert("y:"+y);
-
-          r = x * x + y * y;
-            alert("r:"+r);
-        } while (!r || r > 1);
-        return µ + σ * x * Math.sqrt(-2 * Math.log(r) / r);
-    }
-
-
-
-    alert(normals(300,80));
-
 var width = 960,
     height = 500;
 

@@ -6,7 +6,7 @@ var width = 900,
 
 //var x = d3.scale.ordinal().rangeRoundBands([left_pad, width-pad], 0.1);  //100  880  0.1
 //var y = d3.scale.linear().range([height-pad, pad]);  // 280,20
-var x = d3.scale.linear().range([width,left_pad]);  //100  880  0.1
+var x = d3.scale.linear().range([left_pad,width]);  //100  880  0.1
 var y = d3.scale.ordinal().rangeRoundBands([ pad,height-pad], 0.1);  // 280,20
 
 var xAxis = d3.svg.axis().scale(x).orient("bottom");
@@ -45,13 +45,14 @@ d3.json('/d3/json/learn5/', function (data) {
         .enter()
         .append('rect')
         .attr('class', 'bar')
-        .attr('x', width-pad)
-        .transition()//.delay(function (d) { return d.bucket*20; })
+        .attr('x', -width)
+        .transition()
+        //.delay(function (d) { return d.N*20; })
         .duration(800)
         .attr('x', function (d) { return x(
-           d.N
+           0
          ); })
-        .attr('width',  function (d) { return  width - x(d.N) } )
+        .attr('width',  function (d) { return  x(d.N) } )
         .attr('y', function (d) { return y(d.bucket); })
         .attr('height',  y.rangeBand());
 });

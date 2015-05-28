@@ -57,6 +57,11 @@ def d3_learn4():
 def d3_learn5():
     return render_template("/d3_learn1/d3_learn5.html")
 
+@app.route('/d3/json/learn5/')
+def d3_learn5_json():
+    return render_template("/d3_learn1/d3_learn5_json.json")
+
+
 @app.route('/d3/learn6/')
 def d3_learn6():
     return render_template("/d3_learn1/d3_learn6.html")

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<title></title>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+<style>
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #eee;
+    shape-rendering: crispEdges;
+  }
+
+  .axis text {
+    font-size: 11px;
+  }
+
+  .bar {
+    fill: steelblue;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div id="graph" class="span12">
+    </div>
+  </div>
+</div>
+1111
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3_learn1/learn5.js') }} "  charset="UTF-8"></script>

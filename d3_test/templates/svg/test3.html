@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .myborder{
+            border:1px solid blue;
+            float: left;
+        }
+
+        .myborder2{
+            border:1px solid orangered;
+            float: left;
+            padding: 20px;
+        }
+        line {
+            stroke: red;
+            stroke-linecap: round;
+            stroke-width: 5;
+        }
+
+        .my_polygon {
+            stroke-width: 1;
+            stroke:steelblue;
+            fill:#888;
+            fill-opacity: .5;
+        }
+
+        .my_path {
+            stroke-width: 1;
+            stroke:steelblue;
+            fill:#888;
+            fill-opacity: .5;
+        }
+        xmp{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<h1>polygon:</h1>
+    <svg class="myborder" width="200px" height="200px">
+        <polygon onclick="alert('===')" points="80,5 50,120 195,120"/>
+        <polygon class="my_polygon" points="60,5 10,120 115,120"/>
+    </svg>
+    <div class="myborder2">
+        <pre>
+            code:
+            <xmp>
+                <svg class="myborder" width="200px" height="200px">
+                    <polygon onclick="alert('===')"  points="80,5 50,120 195,120"/>
+                    <polygon  class="my_polygon" points="60,5 10,120 115,120"/>
+                </svg>
+            </xmp>
+        </pre>
+    </div>
+<h1>path:</h1>
+    <svg  class="myborder" width="230px" height="300px">
+        <path d="M 20 120 L 120 220, 220 120 Z" stroke="steelblue"
+            fill="lightyellow" stroke-width="2"></path>
+        <path class="my_path" d="M 30 140 L 130 210, 210 110 Z"></path>
+    </svg>
+
+    <div class="myborder2">
+        <pre>
+            code:
+            <xmp>
+                <svg  class="myborder" width="230px" height="300px">
+                    <path d="M 20 120 L 120 220, 220 120 Z" stroke="steelblue"
+                        fill="lightyellow" stroke-width="2"></path>
+                    <path class="my_path" d="M 30 140 L 130 210, 210 110 Z"></path>
+                </svg>
+
+                .my_path {
+                    stroke-width: 1;
+                    stroke:steelblue;
+                    fill:#888;
+                    fill-opacity: .5;
+                }
+            </xmp>
+
+        </pre>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .myborder{
+            border:1px solid blue;
+            float: left;
+        }
+
+        .myborder2{
+            border:1px solid orangered;
+            float: left;
+            padding: 20px;
+        }
+        line {
+            stroke: red;
+            stroke-linecap: round;
+            stroke-width: 5;
+        }
+
+        .my_polygon {
+            stroke-width: 1;
+            stroke:steelblue;
+            fill:#888;
+            fill-opacity: .5;
+        }
+
+        .my_path {
+            stroke-width: 1;
+            stroke:steelblue;
+            fill:#888;
+            fill-opacity: .5;
+        }
+        h1{
+            clear: both;
+        }
+
+        xmp{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<h1>Paths with curves:</h1>
+    <svg class="myborder" width="460px" height="300px">
+
+        <path class="my_path" d="M 30 140 L 130 210, C 200 70 480 290 320 120 Z"></path>
+    </svg>
+    <div class="myborder2">
+        <pre>
+            code:
+            <xmp>
+                <svg class="myborder" width="200px" height="200px">
+                    <path class="my_path" d="M 30 140 L 130 210,
+                     C 200 70 480 290 320 120 Z"></path>
+                </svg>
+            </xmp>
+
+    As an example, let's apply a cubic Bézier curve to the triangle.
+    The format for the command is as follows:
+		C x1 y1 x2 y2 x y
+	This command can be inserted into the path structure at any point:
+        • C: Indicates that we are applying a Cubic Bézier curve, just as L in
+            the previous example indicates a straight line
+        • x1 and y1: Adds a control point to influence the curve's tangent
+        • x2 and y2: Adds a second control point after applying x1 and y1
+        • x and y: Indicates the final resting place of the line
+
+        </pre>
+    </div>
+<h1>illustrate how the cubic Bézier curve works:</h1>
+    <svg class="myborder" height="300" width="525">
+        <path class="my_path" d="M 120 120 L 220 220 C 200 70 480 290 320 120 Z ">
+        </path>
+        <line x1="220" y1="220" x2="200" y2="70"></line>
+        <circle cx="200" cy="70" r="5" ></circle>
+        <line x1="200" y1="70" x2="480" y2="290"></line>
+        <circle cx="480" cy="290" r="5"></circle>
+        <line x1="480" y1="290" x2="320" y2="120"></line>
+    </svg>
+
+    <div class="myborder2">
+        <pre>
+            code:
+            <xmp>
+                <svg class="myborder" height="300" width="525">
+                    <path class="my_path" d="M 120 120 L 220 220 C 200 70 480 290 320 120 Z ">
+                    </path>
+                    <line x1="220" y1="220" x2="200" y2="70"></line>
+                    <circle cx="200" cy="70" r="5" ></circle>
+                    <line x1="200" y1="70" x2="480" y2="290"></line>
+                    <circle cx="480" cy="290" r="5"></circle>
+                    <line x1="480" y1="290" x2="320" y2="120"></line>
+                </svg>
+
+                .my_path {
+                    stroke-width: 1;
+                    stroke:steelblue;
+                    fill:#888;
+                    fill-opacity: .5;
+                }
+            </xmp>
+
+        </pre>
+    </div>
+</body>
+</html>

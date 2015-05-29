@@ -60,19 +60,7 @@
                 .attr("transform", "translate("+(left_pad-pad)+", 0)")
                 .call(yAxis);
 
-                svg.selectAll('rect').data(data).enter()
-                    .append('rect')
-                    .attr("class",  'bar_white')
-                    .attr('x', 0)
-                    .attr('y', function (d) {
-                            alert(d.bucket);
-                            return d.bucket})
-                    .attr('rx', rx_d)
-                    .attr('ry', rx_d)
-                    .attr("width", function (d) { return  x(d.N) - left_pad })
-                    .attr("height", y.rangeBand());
-
-                svg.selectAll('rect').data(data).enter()
+                svg.selectAll('rect3').data(data).enter()
                     .append('rect')
                     .attr("class", function (d) {
                         if (d.width < wd) {
@@ -115,7 +103,7 @@
                         return d.height
                     });
 
-                svg.selectAll('text').data(data).enter()
+                svg.selectAll('text2').data(data).enter()
                     .append('text')
                     .text(function (d) {
                         if (d.width < wd) {

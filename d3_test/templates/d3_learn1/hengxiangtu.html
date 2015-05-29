@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<title></title>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+<style>
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #eee;
+    shape-rendering: crispEdges;
+  }
+
+  .axis text {
+    font-size: 11px;
+  }
+
+  .bar {
+    fill: steelblue;
+  }
+  .bar2 {
+    fill: red;
+  }
+
+    .myborder2{
+        border:1px solid orangered;
+        float: left;
+        padding: 20px;
+    }
+
+    .bar_blue {
+      fill: #FFCC00;
+    }
+    .bar_white {
+      fill: #00CC99;
+    }
+</style>
+
+<script>
+var width = 600,
+    height = 1200,
+    pad = 20,
+    left_pad = 100;
+var line_heigth = 50;
+
+var x = d3.scale.linear().range([left_pad,width - left_pad]);  //100  880  0.1
+var y = d3.scale.ordinal().rangeRoundBands([ pad,height-pad], 0.1);  // 280,20
+
+var xAxis = d3.svg.axis().scale(x).orient("bottom");
+var yAxis = d3.svg.axis().scale(y).orient("left");
+
+var svg = d3.select("#graph")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+d3.json('/d3/json/hengxiangtu/', function (data) {
+    var len = data.length;
+    for (var i = 0; i < len; i++) {
+        var data_new = [];
+        var title = data[i]['title'];
+        var mean = data[i]['mean'];
+        var diy_mean = data[i]['diy_mean'];
+        var max = data[i]['max'];
+        var type = data[i]['type'];
+        data_new.push({
+            "titel": title,
+            "mean": mean,
+            "diy_mean": diy_mean,
+            "max": max,
+            "type": type
+        });
+
+        x.domain([0, d3.max(data_new, function (d) {
+            return d.max
+        })]);
+
+
+        svg.selectAll('rect2')
+                .data(data_new)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar_white')
+                .attr('x', left_pad)        //柱形图移动从哪里开始
+                .attr('width', function (d) {
+                    return x(d.max) - left_pad;
+                })
+                .attr('id', function (d) {
+                    return 'bar_a_' + i
+                })
+                .attr('y', (i + 1) * line_heigth)
+                .attr('height', 30);
+
+        svg.selectAll('rect3')
+                .data(data_new)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar_blue')
+                .attr('x', left_pad)        //柱形图移动从哪里开始
+                .attr('width', function (d) {
+                    return x(d.mean) - left_pad;
+                })
+                .attr('id', function (d) {
+                    return 'bar_b_' + i
+                })
+                .attr('y', (i + 1) * line_heigth)
+                .attr('height', 30)
+                .on('click', function (d) {
+                    var i = this.id.charAt(6);
+                    svg.selectAll('rect4' + i).data(data_new).enter().append('rect').attr('x', x(d.mean))
+                            .attr('y', (parseInt(i) + 1) * line_heigth + 25)
+                            .attr('width', 3).attr('height', 10);
+                });
+
+
+
+        var x_svg = svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0, " + ((i+1) * 50 + 30) + ")")
+                .call(xAxis);
+            }
+    });
+
+
+</script>
+<div class="container">
+  <div class="row">
+    <div id="graph" class="span12">
+    </div>
+  </div>
+</div>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.js') }} "  charset="UTF-8"></script>

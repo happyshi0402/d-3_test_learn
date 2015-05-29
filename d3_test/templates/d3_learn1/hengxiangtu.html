@@ -104,15 +104,20 @@ d3.json('/d3/json/hengxiangtu/', function (data) {
                 .attr('y', (i + 1) * line_heigth)
                 .attr('height', 30)
                 .on('click', function (d) {
-                    var i = this.id.charAt(6);
-                    svg.selectAll('rect4' + i).data(data_new).enter().append('rect').attr('x', x(d.mean))
-                            .attr('y', (parseInt(i) + 1) * line_heigth + 25)
-                            .attr('width', 3).attr('height', 10);
+                    var a = this.id.charAt(6);
+                    alert(x(d.max) + 300);alert(event.pageX - 300);
+
+                    alert(d.max*((event.pageX - 300)/(x(d.max) - 100)));
+
+                    svg.selectAll('rect4' + a).data(data_new).enter().append('rect').attr('x', event.pageX - 200)
+                            .attr('y', (parseInt(a) + 1) * line_heigth + 25)
+                            .attr('width', 3).attr('height', 10)
+                    svg.selectAll('text_a' + a).data(data_new).enter().append('text')
+                            .text(function(d){return (event.pageX - 200)/ x(d.max)}).attr('x', event.pageX - 200)
+                            .attr('y', (parseInt(a) + 1) * line_heigth + 15);
                 });
 
-
-
-        var x_svg = svg.append("g")
+            var x_svg = svg.append("g")
                 .attr("class", "axis")
                 .attr("transform", "translate(0, " + ((i+1) * 50 + 30) + ")")
                 .call(xAxis);

@@ -100,7 +100,7 @@ d3.json('/d3/json/learn5/', function (data) {
         })
         .attr('x', -width)        //柱形图移动从哪里开始
         .transition()
-        //.delay(function (d) { return d.N*20; })
+        .delay(function (d) { return d.N; })
         .duration(800)
         .attr('x', function (d) { return x(
             0

@@ -81,6 +81,10 @@ def d3_prograssbar():
 def d3_prograssbar_run():
     return render_template("/d3_learn1/prograssbar.json")
 
+@app.route('/d3/learn9/')
+def d3_learn9():
+    return render_template("/d3_learn1/d3_learn9.html")
+
 @app.route('/d3/relitu/')
 def d3_relitu():
     return render_template("/d3_learn1/relitu.html")

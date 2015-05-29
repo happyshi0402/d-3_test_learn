@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<title></title>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+<style>
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #eee;
+    shape-rendering: crispEdges;
+  }
+
+  .axis text {
+    font-size: 11px;
+  }
+
+  .bar {
+    fill: steelblue;
+  }
+  .bar2 {
+    fill: red;
+  }
+
+    .myborder2{
+        border:1px solid orangered;
+        float: left;
+        padding: 20px;
+    }
+
+    .bar_blue {
+      fill: steelblue;
+    }
+    .bar_white {
+      fill: whitesmoke;
+    }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div id="graph" class="span12">
+    </div>
+  </div>
+</div>
+<script>
+var width = 500,
+    height = 200,
+    pad = 20,
+    left_pad = 100,
+        my_rxy = 7;
+
+
+//var x = d3.scale.ordinal().rangeRoundBands([left_pad, width-pad], 0.1);  //100  880  0.1
+//var y = d3.scale.linear().range([height-pad, pad]);  // 280,20
+var x = d3.scale.linear().range([left_pad,width-pad - 100]);  //100  880  0.1
+var y = d3.scale.ordinal().rangeRoundBands([ pad,height-pad], 0.5);  // 280,20
+
+var xAxis = d3.svg.axis().scale(x).orient("bottom");
+var yAxis = d3.svg.axis().scale(y).orient("left");
+//var yAxis2 = d3.svg.axis().scale(x).orient("right");
+
+var svg = d3.select("#graph")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+d3.json('/d3/prograssbar/run/', function (data) {
+
+    var data2 = [];
+    data = d3.keys(data).map(function (key) {
+        return {bucket: String(key),
+                N: data[key]};
+    });
+
+    x.domain([0,d3.max(data, function (d) {
+        return d.N })]);
+
+    y.domain(data.map(function (d) { return d.bucket; }));
+
+    var x_svg = svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(0, "+(height-pad)+")")
+        .call(xAxis);
+
+    var y_svg = svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate("+(left_pad-pad)+", 0)")
+        .call(yAxis);
+
+{#    var y_svg2 = svg.append("g")#}
+{#        .attr("class", "axis")#}
+{#        .attr("transform", "translate("+(left_pad-pad)+", 0)")#}
+{#        .call(yAxis2);#}
+
+    svg.selectAll('rect2')
+        .data(data)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar_white')
+        .attr('x', -width)        //柱形图移动从哪里开始
+        .attr('x', function (d) { return  x(0)} ).attr('rx', my_rxy ).attr('ry', my_rxy )
+        .attr('width',  function (d) { return  x(100) - 100 } )
+        .attr('id',  function (d) { return  'bar'+parseInt(x(d.N)/((width - pad)/ 150)) } )
+        .attr('y', function (d) { return y(d.bucket); })
+        .attr('height',  y.rangeBand());
+
+    svg.selectAll('text2').data(data).enter().append('text')
+        .text(function (d) { return d.N + "%"; })
+        .attr('x', width - 100)
+        .attr('y', function (d) { return y(d.bucket) + 11; });
+
+    svg.selectAll('rect3')
+        .data(data)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar_blue')
+        .attr('x', -width).attr('rx', my_rxy ).attr('ry', my_rxy )        //柱形图移动从哪里开始
+        .transition()
+        .delay(function (d) { return d.N; })
+        .duration(800)
+        .attr('x', function (d) { return x(
+            0
+        ); })
+        .attr('width',  function (d) { return  x(d.N) - 100 } )
+        .attr('id',  function (d) { return  'bar'+parseInt(x(d.N)/((width - pad)/ 150)) } )
+        .attr('y', function (d) { return y(d.bucket); })
+        .attr('height',  y.rangeBand());
+    });
+
+
+</script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='d3.js') }} "  charset="UTF-8"></script>

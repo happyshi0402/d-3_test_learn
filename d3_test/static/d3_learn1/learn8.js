@@ -133,9 +133,11 @@ d3.json('/d3/json/learn5/', function (data) {
                 N: data[key]};
     });
 
-    alert(data2.length);
+    //data3 = d3.keys(data2).map(function (key) {
+    //    return {bucket: String(key),
+    //            N: data[key]};
+    //});
 
-    y = d3.scale.ordinal().domain(eases).rangeBands([50, 500]);
     // x.domain(data.map(function (d) { return d.bucket; }));
     // y.domain([0, d3.max(data, function (d) { return d.N })]);
 
@@ -172,7 +174,7 @@ d3.json('/d3/json/learn5/', function (data) {
         })
         .attr('x', -width)        //柱形图移动从哪里开始
         .transition()
-        //.delay(function (d) { return d.N*20; })
+        .delay(function (d) { return d.N; })
         .duration(800)
         .attr('x', function (d) { return x(
             0
@@ -182,3 +184,4 @@ d3.json('/d3/json/learn5/', function (data) {
         .attr('y', function (d) { return y(d.bucket); })
         .attr('height',  y.rangeBand());
     });
+

@@ -69,6 +69,22 @@ def d3_learn6():
 def d3_learn7():
     return render_template("/d3_learn1/d3_learn7.html")
 
+@app.route('/d3/learn8/')
+def d3_learn8():
+    return render_template("/d3_learn1/d3_learn8.html")
+
+@app.route('/d3/prograssbar/')
+def d3_prograssbar():
+    return render_template("/d3_learn1/prograssbar.html")
+
+@app.route('/d3/prograssbar/run/')
+def d3_prograssbar_run():
+    return render_template("/d3_learn1/prograssbar.json")
+
+@app.route('/d3/relitu/')
+def d3_relitu():
+    return render_template("/d3_learn1/relitu.html")
+
 @app.route('/histogram/')
 def histogram():
     return render_template("/ch1/histogram.html")

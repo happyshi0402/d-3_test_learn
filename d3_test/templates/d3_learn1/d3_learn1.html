@@ -14,8 +14,22 @@
     svg.append('rect')
         .attr('x', 10)
         .attr('y', 10)
-        .attr("width",50)
+        .attr("width",100)
         .attr("height",100);
+
+    svg.select('rect')
+        .transition().style('fill', 'red').attr('x', 100)
+        .transition().attr('y', 100);
+
+
+    d3.select('svg')
+        .append('text')
+        .attr({x: 100, y: 100})
+        .text("I'm growing!")
+        .transition()
+        .styleTween('font', function () {
+        return d3.interpolate('12px Helvetica', '36px Comic Sans MS')});
+
 
     var data = [
                 {
@@ -30,7 +44,7 @@
                     height:40
                 }];
 
-    var svg2 = d3.select("#d3_show2")
+    var svg2 = d3.select("#d3_show1")
                 .append("svg")
                 .attr("width", 200)
                 .attr("height", 200);
@@ -40,6 +54,15 @@
             .attr('y', function(d){ return d.y})
             .attr("width", function(d){ return d.width})
             .attr("height", function(d){ return d.height});
+
+    svg2.selectAll('rect').transition()
+        .style('fill', 'blue')
+        .each('start', function () { //alert('11');
+         })
+        .each('end', function () { //alert('22');
+        });
+
+
 </script>
 <style>
     .myborder{

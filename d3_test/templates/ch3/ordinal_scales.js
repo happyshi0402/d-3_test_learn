@@ -20,12 +20,23 @@ svg.selectAll('path')
           })
     .style('fill', function (d) { return colors(d); });
 
+//svg.selectAll('rect')
+//    .data(data)
+//    .enter()
+//    .append('rect')
+//    .attr({x: function (d) { return bands(d); },
+//           y: height/2,
+//           width: bands.rangeBand(),
+//           height: 10})
+//    .style('fill', function (d) { return colors(d); });
+
 svg.selectAll('rect')
     .data(data)
     .enter()
     .append('rect')
     .attr({x: function (d) { return bands(d); },
-           y: height/2,
+           y: height/2 - 140,
            width: bands.rangeBand(),
-           height: 10})
+           height: 120})
     .style('fill', function (d) { return colors(d); });
+

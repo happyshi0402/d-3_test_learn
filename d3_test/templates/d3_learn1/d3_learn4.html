@@ -16,8 +16,8 @@
 var width = 960,
     height = 500;
 
-var randomX = d3.random.normal(width / 2, 80),
-    randomY = d3.random.normal(height / 2, 80);
+var randomX = d3.random.bates(width / 2, 80),
+    randomY = d3.random.bates(height / 2, 80);
 
 //d3.random.bates - 生成具有贝茨分布规律的随机数。
 //d3.random.irwinHall - 生成具有Irwin–Hall分布规律的随机数。

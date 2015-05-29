@@ -20,26 +20,58 @@
         return arr;
     }
 
+    //根据柱形图的高度，对此进行划分成n个小的正方形进行显示
+    function makeData2(arr,rect_y,rect_width,size){
+        //var arr = [];
+        var num_rec = rect_width / (size+1);
+        var las_width = rect_width % (size+1);
+
+        for (var i=0; i<num_rec; i++){
+            arr.push({
+                x:Math.floor(i * size + 1),
+                y:Math.floor(rect_y  + 1),
+                width:Math.floor(size+ 1),
+                height:Math.floor(size + 1)
+            });
+        }
+        if(las_width > 0){
+            arr.push({
+                x:Math.floor(i * size + 1),
+                y:Math.floor(las_width  + 1),
+                width:Math.floor(size+ 1),
+                height:Math.floor(size + 1)
+            });
+        }
+        return arr;
+    }
+
     var rectangles = function(svg) {
-        //svg.selectAll('#d3_show3').clear();
         var data = makeData(2);
         var rect = svg.selectAll('rect').data(data);
         // Enter
         rect.enter().append('rect')
-                    .attr("class", "my_rect")
-                    .attr('test', function(d,i) {
-                        // Enter called 2 times only
-                        console.log('enter placing initial rectangle: ', i)
-                    });
+                .attr("class", "my_rect")
+                .attr('test', function (d, i) {
+                    // Enter called 2 times only
+                    console.log('enter placing initial rectangle: ', i)
+                });
         // Update
-        rect.transition().duration(500).attr('x', function(d){ return d.x; })
-                                        .attr('y', function(d){ return d.y; })
-                                        .attr('width', function(d){ return d.width; })
-                                        .attr('height', function(d){ return d.height; })
-                                        .attr('test', function(d, i) {
-                                            // update every data change
-                                            console.log('updating x position to: ', d.x)
-                                        });
+        rect.transition().duration(500).attr('x', function (d) {
+            return d.x;
+        })
+        .attr('y', function (d) {
+            return d.y;
+        })
+        .attr('width', function (d) {
+            return d.width;
+        })
+        .attr('height', function (d) {
+            return d.height;
+        })
+        .attr('test', function (d, i) {
+            // update every data change
+            console.log('updating x position to: ', d.x)
+        });
     }
     var svg = d3.select("#d3_show3")
                 .append("svg")

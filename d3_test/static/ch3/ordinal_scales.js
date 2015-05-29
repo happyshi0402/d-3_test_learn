@@ -29,3 +29,13 @@ svg.selectAll('rect')
            width: bands.rangeBand(),
            height: 10})
     .style('fill', function (d) { return colors(d); });
+
+svg.selectAll('rect1')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr({x: function (d) { return bands(d); },
+           y: height/2  + 20,
+           width: bands.rangeBand(),
+           height: 10})
+    .style('fill', function (d) { return colors(d); });

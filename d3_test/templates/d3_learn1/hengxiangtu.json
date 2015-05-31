@@ -1,21 +1,21 @@
 [{ "title": "Ti/Tv Genomic",
   "mean": 1.9,
-  "diy_mean": 2.09,
+  "test": 2.09,
   "max": 3.8,
   "type": 0
 },{ "title": "Ti/Tv Exonic",
   "mean": 2.6,
-  "diy_mean": 3.08,
+  "test": 3.08,
   "max": 3.8,
   "type": 0
 },{ "title": "Median Coverage",
   "mean": 20,
-  "diy_mean": 118,
+  "test": 118,
   "max": 200,
   "type": 0
 },{ "title": "%SNP with QUAL>=40",
   "mean": 80,
-  "diy_mean": 84,
+  "test": 84,
   "max": 100,
   "type":1
 }]

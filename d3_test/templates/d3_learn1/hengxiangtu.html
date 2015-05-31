@@ -27,10 +27,10 @@
     }
 
     .bar_blue {
-      fill: #FFCC00;
+        fill: #00CC99;
     }
     .bar_white {
-      fill: #00CC99;
+        fill: red;
     }
 </style>
 
@@ -39,7 +39,7 @@ var width = 600,
     height = 1200,
     pad = 20,
     left_pad = 100;
-var line_heigth = 50;
+var line_heigth = 90;
 
 var x = d3.scale.linear().range([left_pad,width - left_pad]);  //100  880  0.1
 var y = d3.scale.ordinal().rangeRoundBands([ pad,height-pad], 0.1);  // 280,20
@@ -50,7 +50,9 @@ var yAxis = d3.svg.axis().scale(y).orient("left");
 var svg = d3.select("#graph")
         .append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .style("background-color", "whitesmoke")
+        ;
 
 d3.json('/d3/json/hengxiangtu/', function (data) {
     var len = data.length;
@@ -58,13 +60,13 @@ d3.json('/d3/json/hengxiangtu/', function (data) {
         var data_new = [];
         var title = data[i]['title'];
         var mean = data[i]['mean'];
-        var diy_mean = data[i]['diy_mean'];
+        var test = data[i]['test'];
         var max = data[i]['max'];
         var type = data[i]['type'];
         data_new.push({
-            "titel": title,
+            "title": title,
             "mean": mean,
-            "diy_mean": diy_mean,
+            "test": test,
             "max": max,
             "type": type
         });
@@ -73,60 +75,125 @@ d3.json('/d3/json/hengxiangtu/', function (data) {
             return d.max
         })]);
 
+        svg.selectAll('text_top_text').data(data_new).enter().append('text')
+                            .text(function(d){ return d.title;})
+                            .attr('x', function(d){return x(parseFloat(d.max)/2) - d.title.length * 5  ;})
+                            .attr('y', (parseInt(i) + 1) * line_heigth - 8 )
+                            .style('font-size','14px').style('font-weight','bold')
+                            .attr('fill','silver');
 
+         svg.selectAll('text_top_duihao').data(data_new).enter().append('line')
+                            .attr('x1', function(d){return x(parseFloat(d.max)/2) + parseFloat(d.title.length) * 5 - 16  ;})
+                            .attr('y1', (parseInt(i) + 1) * line_heigth - 12)
+                            .attr('x2', function(d){return x(parseFloat(d.max)/2) + parseFloat(d.title.length) * 5 - 10  ;})
+                            .attr('y2', (parseInt(i) + 1) * line_heigth - 6)
+                            .attr('stroke','#00CC99') .attr('stroke-width','1.5');
+
+         svg.selectAll('text_top_duihao2').data(data_new).enter().append('line')
+                            .attr('x1', function(d){return x(parseFloat(d.max)/2) + parseFloat(d.title.length) * 5 - 10 - 0.5;})
+                            .attr('y1', (parseInt(i) + 1) * line_heigth - 6 - 0.5)
+                            .attr('x2', function(d){return x(parseFloat(d.max)/2) + parseFloat(d.title.length) * 5 + 2 ;})
+                            .attr('y2', (parseInt(i) + 1) * line_heigth - 18)
+                            .attr('stroke','#00CC99') .attr('stroke-width','1.5');
+
+        //绿色条
         svg.selectAll('rect2')
-                .data(data_new)
-                .enter()
-                .append('rect')
-                .attr('class', 'bar_white')
-                .attr('x', left_pad)        //柱形图移动从哪里开始
-                .attr('width', function (d) {
-                    return x(d.max) - left_pad;
-                })
-                .attr('id', function (d) {
-                    return 'bar_a_' + i
-                })
-                .attr('y', (i + 1) * line_heigth)
-                .attr('height', 30).on('click',function(d){
-                   alert(event.pageX - 300);
-                });
-
-        svg.selectAll('rect3')
                 .data(data_new)
                 .enter()
                 .append('rect')
                 .attr('class', 'bar_blue')
                 .attr('x', left_pad)        //柱形图移动从哪里开始
                 .attr('width', function (d) {
-                    return x(d.mean) - left_pad;
+                    return x(d.max) - left_pad;
                 })
                 .attr('id', function (d) {
-                    return 'bar_b_' + i
+                    return 'bar_a_' + i;
                 })
                 .attr('y', (i + 1) * line_heigth)
                 .attr('height', 30)
                 .on('click', function (d) {
                     var a = this.id.charAt(6);
                     var bb = Math.round(d.max/400 *  (event.pageX -300) * 100) / 100;
-                    svg.selectAll('#rect_b'+a).remove();
-                    svg.selectAll('rect4').data(data_new).enter().append('rect').attr('x', event.pageX - 200)
-                            .attr('id','rect_b'+a)
+                    svg.selectAll('#rect_b1'+a).remove();
+                    svg.selectAll('rect42').data(data_new).enter().append('rect').attr('x', event.pageX - 200)
+                            .attr('id','rect_b1'+a)
                             .attr('y', (parseInt(a) + 1) * line_heigth + 25)
                             .attr('width', 3).attr('height', 10);
-                    svg.selectAll('#text_b'+a).remove();
-                    svg.selectAll('text_a').data(data_new).enter().append('text')
+                    svg.selectAll('#text_b1'+a).remove();
+                    svg.selectAll('text_a1').data(data_new).enter().append('text')
                             .text(function(d){return (bb)})
-                            .attr('id','text_b'+a)
+                            .attr('id','text_b1'+a)
                             .attr('x', event.pageX - 200)
                             .attr('y', (parseInt(a) + 1) * line_heigth + 15);
                 });
+        //中值绿色条
+        svg.selectAll('rect_bottom_blue').data(data_new).enter().append('rect')
+                .attr('x', function(d){
+                    return x(d.mean);
+                })
+                .attr('class','bar_blue')
+                .attr('id','rect__bottom'+i)
+                .attr('y', (parseInt(i) + 1) * line_heigth + 28)
+                .attr('width', 2).attr('height', 10);
+        //下边坐标数字
+        var text_data = [{mean:0},{mean:data_new[0]["mean"]},{mean:data_new[0]["max"]}];
+        svg.selectAll('text_bottom_text').data(text_data).enter().append('text')
+                            .text(function(d){return (d.mean)})
+                            .attr('x', function(d){
+                                var add_bottom = 0;
+                                if(d.mean.toString().length >= 0){
+                                    add_bottom = 4*(d.mean.toString().length);
+                                }
+                                return x(d.mean) - add_bottom;
+                            })
+                            .attr('y', (parseInt(i) + 1) * line_heigth + 48)
+                            .style('font-size','8px');
+        //黄色条
+        svg.selectAll('rect3')
+            .data(data_new)
+            .enter()
+            .append('rect')
+            .attr('class', 'bar_white')
+            .attr('x', left_pad)        //柱形图移动从哪里开始
+            .attr('width', function (d) {
+                return x(d.mean) - left_pad;
+            })
+            .attr('id', function (d) {
+                return 'bar_b_' + i
+            })
+            .attr('y', (i + 1) * line_heigth)
+            .attr('height', 30)
+            .on('click', function (d) {
+                var a = this.id.charAt(6);
+                var bb = Math.round(d.max/400 *  (event.pageX -300) * 100) / 100;
+                svg.selectAll('#rect_b'+a).remove();
+                svg.selectAll('rect4').data(data_new).enter().append('rect').attr('x', event.pageX - 200)
+                        .attr('id','rect_b'+a)
+                        .attr('y', (parseInt(a) + 1) * line_heigth + 25)
+                        .attr('width', 3).attr('height', 10);
+                svg.selectAll('#text_b'+a).remove();
+                svg.selectAll('text_a').data(data_new).enter().append('text')
+                        .text(function(d){return (bb)})
+                        .attr('id','text_b'+a)
+                        .attr('x', event.pageX - 200)
+                        .attr('y', (parseInt(a) + 1) * line_heigth + 15);
+        });
 
-            var x_svg = svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(0, " + ((i+1) * 50 + 30) + ")")
-                .call(xAxis);
-            }
-    });
+        svg.selectAll('rect_test').data(data_new).enter().append('rect').attr('x', function(d){ return x(d.test)})
+                .attr('id','rect_test'+i)
+                .attr('y', (parseInt(i) + 1) * line_heigth + 25)
+                .attr('width', 3).attr('height', 10);
+        svg.selectAll('text_test').data(data_new).enter().append('text')
+                .text(function(d){return (d.test);})
+                .attr('id','text_test'+i)
+                .attr('x', function(d){
+                    var left_leth  = d.test.toString().length;
+                    var left_x = 4 * parseInt(left_leth);
+                    return x(d.test) - left_x;
+                })
+                .attr('y', (parseInt(i) + 1) * line_heigth + 20);
+    }
+});
 
 
 </script>

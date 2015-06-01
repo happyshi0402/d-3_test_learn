@@ -97,6 +97,10 @@ def d3_json_hengxiangtu():
 def d3_variant_zhuzhuangtu():
     return render_template("/d3_learn1/variant_zhuzhuangtu.html")
 
+@app.route('/d3/txt/variant_zhuzhuangtu/')
+def d3_txt_zhuzhuangtu():
+    return render_template("/d3_learn1/123_pic2.txt")
+
 @app.route('/d3/relitu/')
 def d3_relitu():
     return render_template("/d3_learn1/relitu.html")

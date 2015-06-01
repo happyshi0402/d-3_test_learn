@@ -1,7 +1,7 @@
 
-var width = 1200,
+var width = 600,
     height = 600,
-    svg = d3.select('#graph')
+svg = d3.select('#graph')
         .append('svg')
         .attr({width: width,
                height: height});
@@ -93,7 +93,7 @@ d3.json('/d3/txt/variant_zhuzhuangtu/', function (data) {
               });
 
     bar.append('text')
-        .text(function (d) { return d[0]; })
+        .text(function (d) { return d[0].end; })
         .attr({transform: function (d) {
                    var bar_height = height-margins.bottom-y(d.y);
 

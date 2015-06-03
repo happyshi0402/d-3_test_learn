@@ -105,6 +105,14 @@ def d3_txt_zhuzhuangtu():
 def d3_relitu():
     return render_template("/d3_learn1/relitu.html")
 
+@app.route('/d3/d3_learn2_1/')
+def d3_learn2_1():
+    return render_template("/d3_learn2/d3_learn2_1.html")
+
+@app.route('/d3/d3_learn2_1/json/')
+def d3_learn2_1_json():
+    return render_template("/d3_learn2/d3_learn2_1.json")
+
 @app.route('/histogram/')
 def histogram():
     return render_template("/ch1/histogram.html")

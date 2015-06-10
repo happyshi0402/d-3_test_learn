@@ -20,6 +20,9 @@ svg.selectAll('path')
           })
     .style('fill', function (d) { return colors(d); });
 
+
+    bands = d3.scale.ordinal().domain(data).rangeBands([0, width], 0.1);
+
 svg.selectAll('rect')
     .data(data)
     .enter()

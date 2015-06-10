@@ -7,6 +7,23 @@
 <script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }} "  charset="UTF-8"></script>
 <body>
 <script>
+
+    for(var i=1; i<255;){
+
+        for(var j=1; j<255;){
+            for(var k=1; k<255;){
+                document.write("<span style=\"background-color:#"+ i.toString(16).toUpperCase()+
+                j.toString(16).toUpperCase()+k.toString(16).toUpperCase()+";width:120px;color:white;\">"+
+                i.toString(16).toUpperCase()+j.toString(16).toUpperCase()+k.toString(16).toUpperCase()+"</span> &nbsp;&nbsp;");
+
+                 k = k + 10;
+            }
+            document.write("</br>");
+             j=j + 10;
+        }
+        document.write("</br>");
+         i = i + 10;
+    }
     function makeData(n){
         var arr = [];
         for (var i=0; i<n; i++){

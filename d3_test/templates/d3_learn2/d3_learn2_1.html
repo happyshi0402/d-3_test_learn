@@ -24,41 +24,53 @@ var svg = d3.select("body").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
     .attr("class", "bubble");
+var data_rect = [];
+ for(var i=0;i < 10; i++) {
 
-d3.json("/d3/d3_learn2_1/json/", function(error, root) {
-  var node = svg.selectAll(".node")
-      .data(bubble.nodes(classes(root))
-      .filter(function(d) { return !d.children; }))
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+     for (var j = 0; j < 10; j++) {
+         var x = (i + 1) * 0.1 + 0.01 * (j + 1);
+         var y = 0.1 * i;
+         data_rect.push({
+             'x': x,
+             'y': y
+         });
 
-  node.append("title")
-      .text(function(d) { return d.className + ": " + format(d.value); });
+        svg.selectAll('rect_gene1')
+             .data(data_rect)
+             .enter()
+             .append('rect')
+             .attr('x', 80 )        //柱形图移动从哪里开始
+             .attr('width', 90)
+             .attr('id', function (d) {
+                 return 'bar_a_'
+             })
+             .attr('y', 80)
+             .attr('height', 90 )
+             .style("fill", function (d) {
+                 return "#00CC99";
+             });
+         }
 
-  node.append("circle")
-      .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return color(d.packageName); });
+          svg.selectAll('rect_gene2')
+             .data(data_rect)
+             .enter()
+             .append('rect')
+             .attr('x', 180 )        //柱形图移动从哪里开始
+             .attr('width', 190)
+             .attr('id', function (d) {
+                 return 'bar_a_'
+             })
+             .attr('y', 180)
+             .attr('height', 190 )
+             .style("fill", function (d) {
+                 return "#00CC99";
+             });
+         }
 
-  node.append("text")
-      .attr("dy", ".3em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return d.className.substring(0, d.r / 3); });
-});
+ }
 
-// Returns a flattened hierarchy containing all leaf nodes under the root.
-function classes(root) {
-  var classes = [];
 
-  function recurse(name, node) {
-    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: node.size});
-  }
 
-  recurse(null, root);
-  return {children: classes};
-}
 
-d3.select(self.frameElement).style("height", diameter + "px");
 
 </script>
